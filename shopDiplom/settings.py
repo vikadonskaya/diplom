@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-@0(5b@-!a+!q4*ir4pk3-mku$k_9cqy#6huw0_^^z5mdw1-sad
 DEBUG = True
 
 ALLOWED_HOSTS = [
-'economiya.onrender.com'
+'economiya-n6rf.onrender.com'
 ]
 
 # Application definition
