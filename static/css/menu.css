@@ -1,0 +1,94 @@
+/* Скрываем меню по умолчанию слева */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* полностью скрыто */
+    width: 250px;
+    height: 100%;
+    background: #ffffff;
+    color: #000000;
+    transition: left 0.3s ease;
+}
+
+/* Открытое меню */
+.side-menu.open {
+    left: 0;
+}
+
+/* Стили списка */
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-menu ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: #000;
+    text-decoration: none;
+}
+
+.side-menu ul li a:hover {
+    background: #A10000;
+    color: #FFFFFF;
+}
+
+.d-flex.overflow-auto::-webkit-scrollbar {
+  display: none;
+}
+
+.d-flex.overflow-auto {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth;
+}
+
+.menu-scroll::-webkit-scrollbar {
+  display: none;             /* для Chrome, Safari, Opera */
+}
+
+.menu-scroll .d-flex.overflow-auto::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+.menu-scroll .d-flex.overflow-auto {
+  -ms-overflow-style: none;  /* IE, Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+
+/* Existing styles for the two-menu */
+.two-menu {
+    text-align: left;
+    position: fixed;
+    top: 0;
+    left: -250px; /* полностью скрыто */
+    width: 250px;
+    height: 100%;
+    background: #ffffff;
+    color: #000000;
+    transition: left 0.3s ease;
+}
+
+/* Открытое меню */
+.two-menu.open {
+    left: 0;
+}
+
+/* Стили списка */
+.two-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.two-menu ul li a {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    color: #000;
+    text-decoration: none;
+}
+
+.two-menu ul li a:hover {
+    background: #A10000;
+    color: #FFFFFF;
+}
