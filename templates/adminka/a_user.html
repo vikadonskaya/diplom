@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-white text-center mb-4">Список Продуктов</h2>
+        <table class="table table-bordered table-striped"
+               style="background-color: white; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+            <thead style="background-color: #f8f9fa;">
+            <tr>
+                <th>Имя</th>
+                <th>Почта</th>
+                <th>Дата</th>
+                <th>Фото</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for u in users %}
+                <tr>
+                    <td>{{ u.username }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.date }}</td>
+                    <td>{% if not u.profile_picture %}
+                        <img src="{% static 'images/def.jpg' %}" class="rounded-circle mb-3"
+                             style="width: 50px; height: 50px" alt="Avatar"/>
+                    {% else %}
+                        <img src="{{ u.profile_picture.url }}" class="rounded-circle mb-3"
+                             style="width: 50px; height: 50px" alt="Avatar"/>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

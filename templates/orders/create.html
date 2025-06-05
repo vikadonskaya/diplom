@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="border p-4 rounded bg-light shadow">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <h4 class="mb-4 text-center">Итоговая сумма: <span
+                                class="font-weight-bold">{{ total_price }} р.</span></h4>
+
+                        <div class="form-group">
+                            <label for="id_address">Адрес</label>
+                            <select name="address" class="form-control" id="id_address" required>
+                                <option value="">Выберите адрес</option>
+                                {% for address in form.address.field.queryset %}
+                                    <option value="{{ address.id }}">{{ address }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-border mb-2" id="addAddressBtn">Добавить адрес</button>
+                        <div class="form-group">
+                            <label for="id_card">Карта</label>
+                            <select name="card" class="form-control" id="id_card" required>
+                                <option value="">Выберите карту</option>
+                                {% for card in form.card.field.queryset %}
+                                    <option value="{{ card.id }}">{{ card }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Кнопки добавления адреса и карты под выпадающими списками -->
+
+                        <button type="button" class="btn btn-border" id="addCardBtn">Добавить карту</button>
+
+                        <button type="submit" class="btn btn-red btn-block mt-3">Заказать</button>
+                    </form>
+
+                    <!-- Модальное окно для добавления карты -->
+                    <div id="addCardModal" class="modal" style="display:none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Добавить новую карту</h5>
+                                    <button type="button" class="btn-close" aria-label="Close"
+                                            onclick="closeCardModal()"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{% url 'add_cart' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="cardNumber" class="form-label">Номер карты</label>
+                                            <input type="text" class="form-control" id="cardNumber" name="number"
+                                                   required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cardCode" class="form-label">Код карты</label>
+                                            <input type="text" class="form-control" id="cardCode" name="code" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cardDate" class="form-label">Дата карты</label>
+                                            <input type="text" class="form-control" id="cardDate" name="date_cart"
+                                                   required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Сохранить карту</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Модальное окно для добавления адреса -->
+                    <div id="addAddressModal" class="modal" style="display:none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Добавить адрес</h5>
+                                    <button type="button" class="btn-close" aria-label="Close"
+                                            onclick="closeAddressModal()"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{% url 'add_address' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label">Адрес</label>
+                                            <input type="text" class="form-control" id="address" name="address"
+                                                   required>
+                                        </div>
+                                        <button type="submit" class="btn btn-red">Сохранить адрес</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
