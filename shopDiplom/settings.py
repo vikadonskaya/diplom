@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-@0(5b@-!a+!q4*ir4pk3-mku$k_9cqy#6huw0_^^z5mdw1-sad
 DEBUG = True
 
 ALLOWED_HOSTS = [
-'diplomShop.onrender.com'
+'economiya.onrender.com'
 ]
 
 # Application definition
@@ -143,6 +143,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'economiya839@gmail.com'
 EMAIL_HOST_PASSWORD = 'ingp iefl near gnax'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+CSRF_TRUSTED_ORIGINS = ['https://economiya.onrender.com']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
