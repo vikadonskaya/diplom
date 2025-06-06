@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container text-white">
+        <div class="row mt-5">
+            <div class="col text-center">
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3"
+                         style="width: 150px; height: 150px; object-fit: cover;" alt="Avatar"/>
+                {% else %}
+                    <img src="{% static 'images/def.jpg' %}" class="rounded-circle mb-3"
+                         style="width: 150px; height: 150px; object-fit: cover;" alt="Avatar"/>
+                {% endif %}
+
+                <h5 class="mb-2"><strong>{{ user.username }}</strong></h5>
+                {% if not user.date %}
+                    <p class="">Добавьте вашу дату рождения, чтобы получать скидки</p>
+                {% else %}
+                    <p class="">{{ user.date }}</p>
+                {% endif %}
+                {% if not user.email %}
+                    <p class="">____</p>
+                {% else %}
+                    <p class="">{{ user.email }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="mt-5 text-black">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <a href="{% url 'orders' %}">Заказы</a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fas fa-history"></i> <a href="{% url 'history' %}">История заказов</a>
+                </li>
+
+
+                <li class="list-group-item">
+                    <i class="fas fa-credit-card"></i> Карты
+                    <ul class="list-group mb-4 mt-4">
+                        {% for c in card %}
+                            <li class="list-group-item">
+                                Номер карты: {{ c.number }}<br>
+                                Код: {{ c.code }}<br>
+                                Дата: {{ c.date_cart }}
+                                <form action="{% url 'delete_card' c.id %}" method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger float-right">Удалить</button>
+                                </form>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">У вас нет сохраненных карт.</li>
+                        {% endfor %}
+                    </ul>
+                    <button class="btn btn-border" id="addCardBtn">Добавить карту</button>
+
+                    <!-- Модальное окно для добавления карты -->
+                    <div id="addCardModal" class="modal" style="display:none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Добавить новую карту</h5>
+                                    <button type="button" class="btn-close" aria-label="Close"
+                                            onclick="closeCardModal()"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{% url 'add_cart' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="cardNumber" class="form-label">Номер карты</label>
+                                            <input type="text" class="form-control" id="cardNumber" name="number"
+                                                   required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cardCode" class="form-label">Код карты</label>
+                                            <input type="text" class="form-control" id="cardCode" name="code" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cardDate" class="form-label">Дата карты</label>
+                                            <input type="text" class="form-control" id="cardDate" name="date_cart"
+                                                   required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Сохранить карту</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <i class="fas fa-map-marker"></i> Адреса
+                    <ul class="list-group mb-4 mt-4">
+                        {% for a in address %}
+                            <li class="list-group-item">{{ a }}
+                                <form action="{% url 'delete_address' a.id %}" method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger float-right">Удалить</button>
+                                </form>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">У вас нет сохраненных адресов.</li>
+
+                        {% endfor %}
+                    </ul>
+                    <button class="btn btn-border" id="addAddressBtn">Добавить адрес</button>
+
+                    <!-- Модальное окно для добавления карты -->
+                    <div id="addAddressModal" class="modal" style="display:none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Добавить адрес</h5>
+                                    <button type="button" class="btn-close" aria-label="Close"
+                                            onclick="closeCardModal()"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{% url 'add_address' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label">Адрес</label>
+                                            <input type="text" class="form-control" id="address" name="address"
+                                                   required>
+                                        </div>
+                                        <button type="submit" class="btn btn-red">Сохранить адрес</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+
+                <li class="list-group-item">
+                    <i class="fas fa-user-edit"></i>
+                    <a class="text-black" id="editProfileBtn">Редактировать</a>
+
+                    <!-- Модальное окно для редактирования профиля -->
+                    <div id="editProfileModal" class="modal" style="display:none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Редактировать профиль</h5>
+                                    <button type="button" class="btn-close" aria-label="Close"
+                                            onclick="closeEditProfileModal()"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                    <form method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="name">Имя</label>
+                                            <input type="text" class="form-control" id="name" name="username"
+                                                   placeholder="Ваше имя" value="{{ user.username }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                   placeholder="Ваш email" value="{{ user.email }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="date">Дата рождения</label>
+                                            <input type="date" class="form-control" id="date" name="date"
+                                                   placeholder="Ваша дата рождения" value="{{ user.date }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="profile_picture">Фото профиля</label>
+                                            <input type="file" class="" id="profile_picture" name="profile_picture">
+                                        </div>
+                                        <button type="submit" class="btn btn-red">Сохранить изменения</button>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <i class="fas fa-sign-out-alt"></i> <a href="{% url 'logout' %}">Выйти из профиля</a>
+                </li>
+                <li class="list-group-item">
+                    <i class="fas fa-user-minus"></i>Удалить профиль
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}

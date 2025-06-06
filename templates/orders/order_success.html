@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-white text-center mb-4">Ваши Заказы</h2>
+                {% for order in orders %}
+                    <div class="card mb-3"> <!-- Установите максимальную высоту -->
+                        <div class="card-header">
+                            <h5 class="mb-0" style="font-size: 1rem;">Заказ №{{ order.order_number }} —
+                                Статус: {{ order.status }}</h5>
+                        </div>
+                        <div class="card-body pl-4 pr-4 pb-3" style="padding: 0.5rem;"> <!-- Уменьшите отступы -->
+                            <p style="font-size: 0.9rem;"><strong>Адрес:</strong> {{ order.address }}</p>
+                            <h6 style="font-size: 0.9rem;">Содержимое заказа:</h6>
+                            {% for item in order.items.all %}
+                                
+                                <a class="d-flex align-items-center mb-3" href="{% url 'shop_single' item.id %}">
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                {% if not item.product.photo %}
+                                                    <img style="width: 64px; height: auto;"
+                                                         src="{% static 'images/def.jpg' %}" class="card-img-top"
+                                                         alt="No photo available">
+                                                {% else %}
+                                                    <img style="width: 64px; height: auto;"
+                                                         src="{{ item.product.photo.url }}" class="card-img-top"
+                                                         alt="{{ item.product.name }}">
+                                                {% endif %}
+                                            </div>
+                                            <div class="ms-3">
+                                                <h5 class="mb-0">{{ item.product.name }}</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-column align-items-end mt-3">
+                                            <p class="card-text mb-0" style="font-size: 0.8rem;">
+                                                <h6 class="item-price">Количество: {{ item.quantity }}</h6>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-end mt-3">
+                                            <p class=" mb-0">{{ item.product.price }} p.</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="alert alert-info" role="alert">
+                        У вас пока нет заказов.
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

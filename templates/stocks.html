@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div style="background: #FFFFFF;" class="site-blocks-cover inner-page py-5"
+         data-aos="fade">
+        <div class="container">
+            <div>
+                <div style="top: 30%; left: 30%;" class="overlay">
+                    <div class="text">
+                        <div style="text-transform: uppercase; color: #0A9800;"
+                             class="site-block-cover-content text-left">
+                            <h2 style="font-size: 50px;">Скидка 30%</h2>
+                            <h4 style="margin-bottom: 30px">На покупку от 3000 рублей</h4>
+                            <button><a href="#" class="btn btn-red rounded-pill px-3">В магазин</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img src="{% static 'images/stocks.png' %}" alt="Image" class="img-fluid"
+                         style="max-width: 100%; height: auto; margin-left: 300px">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
