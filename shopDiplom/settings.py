@@ -144,7 +144,7 @@ EMAIL_HOST_USER = 'economiya839@gmail.com'
 EMAIL_HOST_PASSWORD = 'ingp iefl near gnax'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-CSRF_TRUSTED_ORIGINS = ['https://economiya.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://shopdiplom.onrender.com']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
