@@ -26,12 +26,17 @@ class Product(models.Model):
     description = models.TextField()
     price = models.IntegerField()
     quantity = models.IntegerField()
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)  # Связь с моделью Brand
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Сначала сохраняем продукт
+
+        if self.brand and self.category and not self.brand.category.filter(id=self.category.id).exists():
+            self.brand.category.add(self.category)
 
 class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
