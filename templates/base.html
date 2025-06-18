@@ -18,269 +18,311 @@
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
-<style>
-    .banner {
-        background-color: #FFFFFF;
-        padding: 60px 20px;
-        position: relative;
-        overflow: hidden;
-        min-height: 350px;
-    }
+    <style>
+        .banner {
+            background-color: #FFFFFF;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 350px;
+        }
 
-    .banner .image-wrapper {
-        width: 50%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .banner .image-wrapper {
+            width: 50%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .banner .image-wrapper img {
-        width: 100%;
-        object-fit: contain;
-        box-shadow: 0 0 15px #A10000;
-    }
+        .banner .image-wrapper img {
+            width: 100%;
+            object-fit: contain;
+            box-shadow: 0 0 15px #A10000;
+        }
 
-    .banner .content {
-        margin-left: 50%;
-        padding-left: 60px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-    }
+        .banner .content {
+            margin-left: 50%;
+            padding-left: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
 
-    .banner .content small {
-        color: #FFFFFF;
-        font-weight: 500;
-        margin-bottom: 10px;
-        display: block;
-    }
+        .banner .content small {
+            color: #FFFFFF;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-    .banner .content h2 {
-        font-weight: 700;
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
+        .banner .content h2 {
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
 
-    .banner .content p {
-        color: #FFFFFF;
-        max-width: 400px;
-        margin-bottom: 30px;
-    }
+        .banner .content p {
+            color: #FFFFFF;
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
 
 
-    .rating {
-        direction: rtl;
-        unicode-bidi: bidi-override;
-        font-size: 1.5rem;
-    }
+        .rating {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+            font-size: 1.5rem;
+        }
 
-    .rating input {
-        display: none;
-    }
+        .rating input {
+            display: none;
+        }
 
-    .rating label {
-        color: #ddd;
-        cursor: pointer;
-        transition: color 0.2s;
-    }
+        .rating label {
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
 
-    .rating input:checked ~ label,
-    .rating label:hover,
-    .rating label:hover ~ label {
-        color: #f5b301;
-    }
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #f5b301;
+        }
 
-    .star-rating {
-        direction: rtl; /* чтобы звезды отражались справа налево */
-        font-size: 2rem;
-    }
+        .star-rating {
+            direction: rtl; /* чтобы звезды отражались справа налево */
+            font-size: 2rem;
+        }
 
-    .star-rating input {
-        display: none;
-    }
+        .star-rating input {
+            display: none;
+        }
 
-    .star-rating label {
-        color: lightgray;
-        cursor: pointer;
-    }
+        .star-rating label {
+            color: lightgray;
+            cursor: pointer;
+        }
 
-    .star-rating input:checked ~ label,
-    .star-rating label:hover,
-    .star-rating label:hover ~ label {
-        color: gold;
-    }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: gold;
+        }
 
-    .form {
-        background: white; /* Цвет фона формы */
-        padding: 20px; /* Отступы внутри формы */
-        border-radius: 5px; /* Закругленные углы */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для формы */
+        .form {
+            background: white; /* Цвет фона формы */
+            padding: 20px; /* Отступы внутри формы */
+            border-radius: 5px; /* Закругленные углы */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для формы */
 
-        input {
+            input {
+                border-radius: 10px; /* Закругленные углы */
+                border: 2px solid #ced4da; /* Цвет рамки */
+                transition: border-color 0.3s;
+            }
+
+            textarea {
+                border-radius: 10px; /* Закругленные углы */
+                border: 2px solid #ced4da; /* Цвет рамки */
+                transition: border-color 0.3s;
+            }
+
+            select {
+                background: none;
+                border-radius: 10px;
+            }
+        }
+
+        .card {
+            background: white;
             border-radius: 10px; /* Закругленные углы */
-            border: 2px solid #ced4da; /* Цвет рамки */
-            transition: border-color 0.3s;
+            transition: transform 0.2s; /* Плавный эффект при наведении */
         }
 
-        textarea {
-            border-radius: 10px; /* Закругленные углы */
-            border: 2px solid #ced4da; /* Цвет рамки */
-            transition: border-color 0.3s;
+        .card:hover {
+            transform: scale(1.05); /* Увеличение карточки при наведении */
         }
 
-        select {
-            background: none;
-            border-radius: 10px;
+        .card-title {
+            display: block; /* Убедитесь, что элемент блочный */
+            overflow: hidden; /* Скрыть переполнение */
+            text-overflow: ellipsis; /* Добавить многоточие */
+            white-space: nowrap; /* Запретить перенос строк */
+            max-width: 100%; /* Ограничить ширину */
+            font-weight: bold; /* Жирный шрифт для заголовка */
         }
-    }
 
-    .card {
-        background: white;
-        border-radius: 10px; /* Закругленные углы */
-        transition: transform 0.2s; /* Плавный эффект при наведении */
-    }
+        .card-text {
+            margin-bottom: 15px; /* Отступы для текста */
+        }
 
-    .card:hover {
-        transform: scale(1.05); /* Увеличение карточки при наведении */
-    }
+        .btn-border {
+            border: 1px solid #6c757d; /* Цвет рамки для кнопки */
+            color: #000000; /* Цвет текста для кнопки */
+        }
 
-    .card-title {
-        display: block; /* Убедитесь, что элемент блочный */
-        overflow: hidden; /* Скрыть переполнение */
-        text-overflow: ellipsis; /* Добавить многоточие */
-        white-space: nowrap; /* Запретить перенос строк */
-        max-width: 100%; /* Ограничить ширину */
-        font-weight: bold; /* Жирный шрифт для заголовка */
-    }
+        .btn-border:hover {
+            background-color: red; /* Цвет фона при наведении */
+            color: white; /* Цвет текста при наведении */
+        }
 
-    .card-text {
-        margin-bottom: 15px; /* Отступы для текста */
-    }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 10000; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
 
-    .btn-border {
-        border: 1px solid #6c757d; /* Цвет рамки для кнопки */
-        color: #000000; /* Цвет текста для кнопки */
-    }
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
 
-    .btn-border:hover {
-        background-color: red; /* Цвет фона при наведении */
-        color: white; /* Цвет текста при наведении */
-    }
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 10000; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0); /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-    }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-    /* Modal Content */
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
+        i,
+        img {
+            margin-right: 10px;
+        }
 
-    /* The Close Button */
-    .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
+        a {
+            color: black;
+        }
 
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
+        a:hover {
+            color: red;
+        }
 
-    i,
-    img {
-        margin-right: 10px;
-    }
+        .icons {
+            display: flex;
+            align-items: center; /* Выравнивание по центру по вертикали */
+        }
 
-    a {
-        color: black;
-    }
+        .search-wrapper {
+            display: flex;
+            align-items: center; /* Выравнивание по центру по вертикали */
+            position: relative; /* Для позиционирования контейнера поиска */
+        }
 
-    a:hover {
-        color: red;
-    }
+        .search-container {
+            width: 60%; /* Ширина контейнера поиска */
+            display: none; /* Скрываем контейнер поиска по умолчанию */
+            position: absolute; /* Позиционируем его относительно родителя */
+            padding: 10px; /* Отступы */
+            background-color: #fff; /* Цвет фона */
+            border: 1px solid #ccc; /* Граница */
+            border-radius: 5px; /* Закругленные углы */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень */
+            z-index: 1000; /* Чтобы он был поверх других элементов */
+        }
 
-    .icons {
-        display: flex;
-        align-items: center; /* Выравнивание по центру по вертикали */
-    }
+        .search-input {
+            width: 100%; /* Полная ширина поля ввода */
+            padding: 8px; /* Отступы внутри поля */
+            border: 1px solid #ccc; /* Граница */
+            border-radius: 5px; /* Закругленные углы */
+            outline: none; /* Убираем обводку при фокусе */
+            transition: border-color 0.3s; /* Плавный переход цвета границы */
+        }
 
-    .search-wrapper {
-        display: flex;
-        align-items: center; /* Выравнивание по центру по вертикали */
-        position: relative; /* Для позиционирования контейнера поиска */
-    }
+        .search-input:focus {
+            border-color: #007bff; /* Цвет границы при фокусе */
+        }
 
-    .search-container {
-        width: 60%; /* Ширина контейнера поиска */
-        display: none; /* Скрываем контейнер поиска по умолчанию */
-        position: absolute; /* Позиционируем его относительно родителя */
-        padding: 10px; /* Отступы */
-        background-color: #fff; /* Цвет фона */
-        border: 1px solid #ccc; /* Граница */
-        border-radius: 5px; /* Закругленные углы */
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень */
-        z-index: 1000; /* Чтобы он был поверх других элементов */
-    }
+        .search-btn {
+            padding: 8px 12px; /* Отступы внутри кнопки */
+            margin-left: 5px; /* Отступ между полем ввода и кнопкой */
+            background-color: #007bff; /* Цвет фона кнопки */
+            color: white; /* Цвет текста кнопки */
+            border: none; /* Убираем границу */
+            border-radius: 5px; /* Закругленные углы */
+            cursor: pointer; /* Указатель при наведении */
+            transition: background-color 0.3s; /* Плавный переход цвета фона */
+        }
 
-    .search-input {
-        width: 100%; /* Полная ширина поля ввода */
-        padding: 8px; /* Отступы внутри поля */
-        border: 1px solid #ccc; /* Граница */
-        border-radius: 5px; /* Закругленные углы */
-        outline: none; /* Убираем обводку при фокусе */
-        transition: border-color 0.3s; /* Плавный переход цвета границы */
-    }
+        .search-btn:hover {
+            background-color: #0056b3; /* Цвет фона кнопки при наведении */
+        }
 
-    .search-input:focus {
-        border-color: #007bff; /* Цвет границы при фокусе */
-    }
+        .search-wrapper .js-search-open {
+            margin-left: 10px; /* Отступ между строкой поиска и иконкой */
+            cursor: pointer; /* Указатель при наведении */
+        }
 
-    .search-btn {
-        padding: 8px 12px; /* Отступы внутри кнопки */
-        margin-left: 5px; /* Отступ между полем ввода и кнопкой */
-        background-color: #007bff; /* Цвет фона кнопки */
-        color: white; /* Цвет текста кнопки */
-        border: none; /* Убираем границу */
-        border-radius: 5px; /* Закругленные углы */
-        cursor: pointer; /* Указатель при наведении */
-        transition: background-color 0.3s; /* Плавный переход цвета фона */
-    }
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 260px;
+            height: 100%;
+            background: #fff;
+            color: white;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            padding-top: 60px;
+            z-index: 1100;
+        }
 
-    .search-btn:hover {
-        background-color: #0056b3; /* Цвет фона кнопки при наведении */
-    }
+        .side-menu.open {
+            left: 0;
+        }
 
-    .search-wrapper .js-search-open {
-        margin-left: 10px; /* Отступ между строкой поиска и иконкой */
-        cursor: pointer; /* Указатель при наведении */
-    }
+        .side-menu ul {
+            padding-left: 0;
+            margin: 0;
+        }
 
+        .side-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+        }
 
-</style>
+        .side-menu a:hover {
+            background: #fff;
+            color: #ecf0f1;
+        }
+
+        .submenu {
+            display: none;
+            background: #fff;
+        }
+
+        .submenu.open {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -351,10 +393,19 @@
                         <a href="{% url 'auth' %}" class="icons-btn d-inline-block"><span
                                 class="fas fa-user"></span></a>
                     {% endif %}
+                    {% if user.is_superuser %}
+                        <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none">
+                            <span class="fas fa-bars"></span>
+                        </a>
+                    {% endif %}
 
-                    <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none">
-                        <span class="fas fa-bars"></span>
-                    </a>
+                    <nav id="side-menu" class="side-menu">
+                        <ul class="list-unstyled">
+                            <li><a href="{% url 'a_orders' %}">Заказы</a></li>
+                            <li><a href="{% url 'a_brend' %}">Бренды</a></li>
+                            <li><a href="{% url 'a_user' %}">Пользователи</a></li>
+                        </ul>
+                    </nav>
                 </div>
 
             </div>
