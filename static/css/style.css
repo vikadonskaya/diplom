@@ -11,25 +11,13 @@ body {
     position: absolute;
     z-index: 1998;
     left: 50%; /* Устанавливаем левую границу на 50% */
-    top: 9%; /* Устанавливаем верхнюю границу на 50% */
+    top: auto; /* Устанавливаем верхнюю границу на 50% */
     transform: translate(-50%, -50%); /* Сдвигаем элемент на половину его ширины и высоты */
     width: 0;
     height: 0;
     border-top: 60px solid #fff;
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
-}
-
-@media (max-width: 768px) {
-    .triangle {
-        top: 3%; /* Меняем положение для меньших экранов */
-    }
-}
-
-@media (min-width: 769px) {
-    .triangle {
-        top: 9%; /* Исходное положение для больших экранов */
-    }
 }
 
 
