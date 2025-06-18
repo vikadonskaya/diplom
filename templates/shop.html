@@ -9,44 +9,38 @@
             </div>
         </div>
         <div class="container">
-            <div class="row mb-5">
-                <div class="col-md-3 order-1 mb-5 mb-md-0">
-                    <div class="border p-4 rounded mb-4 bg-white">
-                        <h3 class="mb-3 h6 text-uppercase text-black d-block">Фильтр по брендам</h3>
-                        <div id="brandFilter">
-                            {% for brand in brands %}
-                                <a href="?brand={{ brand.id }}" class="brand-link">{{ brand.name }}</a><br>
-                            {% endfor %}
-
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="border p-2 rounded bg-white">
-                        <div class="container mt-2">
-                            <h3 class="mb-3 h6 text-uppercase text-black d-block">Фильтр по цене</h3>
-                            <form id="priceFilterForm">
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="minPrice">Минимальная цена (₽)</label>
-                                        <input type="number" class="form-control" id="minPrice"
-                                               placeholder="Введите минимальную цену">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="maxPrice">Максимальная цена (₽)</label>
-                                        <input type="number" class="form-control" id="maxPrice"
-                                               placeholder="Введите максимальную цену">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-red">Применить фильтр</button>
-                            </form>
-                        </div>
-                    </div>
+    <div class="row mb-5">
+        <!-- Фильтр по брендам и цене -->
+        <aside class="col-12 col-md-3 order-2 order-md-1 mb-4 mb-md-0">
+            <div class="border p-4 rounded mb-4 bg-white">
+                <h3 class="mb-3 h6 text-uppercase text-black">Фильтр по брендам</h3>
+                <div id="brandFilter">
+                    {% for brand in brands %}
+                        <a href="?brand={{ brand.id }}" class="brand-link d-block mb-1">{{ brand.name }}</a>
+                    {% endfor %}
                 </div>
+            </div>
 
-                <div class="col-md-9 order-1">
+            <div class="border p-3 rounded bg-white">
+                <h3 class="mb-3 h6 text-uppercase text-black">Фильтр по цене</h3>
+                <form id="priceFilterForm">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="minPrice">Мин. цена (₽)</label>
+                            <input type="number" class="form-control" id="minPrice" placeholder="Минимальная">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="maxPrice">Макс. цена (₽)</label>
+                            <input type="number" class="form-control" id="maxPrice" placeholder="Максимальная">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block">Применить фильтр</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Основной контент -->
+        <main class="col-12 col-md-9 order-1 order-md-2">
 
                     <div class="container">
                         <div class="row mb-5" id="productList">
@@ -102,7 +96,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                </div>
+                </main>
             </div>
         </div>
 
