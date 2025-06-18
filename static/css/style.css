@@ -20,6 +20,19 @@ body {
     border-right: 150px solid transparent;
 }
 
+@media (max-width: 768px) {
+    .triangle {
+        top: 5%; /* Меняем положение для меньших экранов */
+    }
+}
+
+@media (min-width: 769px) {
+    .triangle {
+        top: 9%; /* Исходное положение для больших экранов */
+    }
+}
+
+
 
 ::-moz-selection {
     background: #000;
